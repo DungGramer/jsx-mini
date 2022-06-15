@@ -11,11 +11,12 @@ exports.jsxs = exports.jsx = (tag, { ref, children, ...props } = {}) => {
     const element = document.createElement(tag);
 
     Object.keys(props).forEach((key) => {
-      if (!props[key]) {
-      } else if (typeof props[key] === 'function') {
-        element[key] = props[key];
-      } else {
-        element.setAttribute(key, props[key]);
+      if (props[key]) {
+        if (typeof props[key] === 'function') {
+          element[key] = props[key];
+        } else {
+          element.setAttribute(key, props[key]);
+        }
       }
     });
 
@@ -24,8 +25,14 @@ exports.jsxs = exports.jsx = (tag, { ref, children, ...props } = {}) => {
 
       children.forEach((child) => {
         if (child) {
-          if (typeof child === 'string') {
-            child = document.createTextNode(child);
+          switch (typeof child) {
+            case 'string':
+            case 'number':
+              child = document.createTextNode(child);
+              break;
+            case 'function':
+              child = child();
+              break;
           }
           element.appendChild(child);
         }
@@ -51,14 +58,19 @@ exports.jsxs = exports.jsx = (tag, { ref, children, ...props } = {}) => {
 exports.Fragment = ({ children } = {}) => {
   const element = document.createDocumentFragment();
 
-  if (!children) {
-  } else {
+  if (children) {
     children = Array.isArray(children) ? flatten(children) : [children];
 
     children.forEach((child) => {
       if (child) {
-        if (typeof child === 'string') {
-          child = document.createTextNode(child);
+        switch (typeof child) {
+          case 'string':
+          case 'number':
+            child = document.createTextNode(child);
+            break;
+          case 'function':
+            child = child();
+            break;
         }
         element.appendChild(child);
       }
