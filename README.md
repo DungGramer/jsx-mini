@@ -2,6 +2,8 @@
 
 | Using JSX without React.js
 
+[![https://nodei.co/npm/jsx-lite.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/jsx-lite.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/jsx-lite)
+
 ## Installation
 
 ```bash

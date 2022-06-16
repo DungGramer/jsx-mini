@@ -1,8 +1,13 @@
 {
   "name": "@jsx-lite/jsx-runtime",
-  "version": "1.0.0",
   "description": "A preset for using JSX without React.js",
-  "main": "index.js",
+  "version": "1.0.0",
+  "main": "jsx-runtime/index.js",
+  "author": {
+    "name": "DungGramer",
+    "email": "dung.dev.gramer@gmail.com",
+    "url": "https://dunggramer.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DungGramer/jsx-lite.git"
@@ -36,6 +41,5 @@
   "files": [
     "index.js"
   ],
-  "author": "DungGramer",
   "license": "MIT"
 }
