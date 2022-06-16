@@ -53,7 +53,7 @@ presets: [
 If you don’t want to configure Babel, a JSX pragma can be used to transform a single file.  
 Import the comments before the JSX code:
 ```js
-    /** @jsxImportSource jsx-mini */
+/** @jsxImportSource jsx-mini */
 ```
 
 ## Usage
