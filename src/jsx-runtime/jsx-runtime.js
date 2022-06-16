@@ -1,14 +1,39 @@
-const flatten = (arr) => {
-  return arr.reduce((flat, toFlatten) => {
-    return flat.concat(
-      Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten
-    );
-  }, []);
+const flatten = (arr) =>
+  arr.reduce(
+    (flat, toFlatten) =>
+      flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten),
+    []
+  );
+
+const appendChildren = (element, children) => {
+  const flattenChildren = Array.isArray(children)
+    ? flatten(children)
+    : [children];
+
+  flattenChildren.forEach((child) => {
+    if (child) {
+      let transformChild = child;
+      switch (typeof child) {
+        case 'string':
+        case 'number':
+          transformChild = document.createTextNode(child);
+          break;
+        case 'function':
+          transformChild = child();
+          break;
+        default:
+          break;
+      }
+      element.appendChild(transformChild);
+    }
+  });
+
+  return element;
 };
 
-exports.jsxs = exports.jsx = (tag, { ref, children, ...props } = {}) => {
+const jsx = (tag, { ref, children, ...props } = {}) => {
   if (typeof tag === 'string') {
-    const element = document.createElement(tag);
+    let element = document.createElement(tag);
 
     Object.keys(props).forEach((key) => {
       if (props[key]) {
@@ -21,22 +46,7 @@ exports.jsxs = exports.jsx = (tag, { ref, children, ...props } = {}) => {
     });
 
     if (children) {
-      children = Array.isArray(children) ? flatten(children) : [children];
-
-      children.forEach((child) => {
-        if (child) {
-          switch (typeof child) {
-            case 'string':
-            case 'number':
-              child = document.createTextNode(child);
-              break;
-            case 'function':
-              child = child();
-              break;
-          }
-          element.appendChild(child);
-        }
-      });
+      element = appendChildren(element, children);
     }
 
     if (ref) {
@@ -48,34 +58,18 @@ exports.jsxs = exports.jsx = (tag, { ref, children, ...props } = {}) => {
     }
 
     return element;
-  } else if (typeof tag === 'function') {
-    return tag({ ref, children, ...props });
-  } else {
-    console.error('Invalid tag type', tag);
   }
+  if (typeof tag === 'function') {
+    return tag({ ref, children, ...props });
+  }
+  throw new Error('Invalid tag type', tag);
 };
+
+exports.jsxs = jsx;
+exports.jsx = jsx;
 
 exports.Fragment = ({ children } = {}) => {
   const element = document.createDocumentFragment();
 
-  if (children) {
-    children = Array.isArray(children) ? flatten(children) : [children];
-
-    children.forEach((child) => {
-      if (child) {
-        switch (typeof child) {
-          case 'string':
-          case 'number':
-            child = document.createTextNode(child);
-            break;
-          case 'function':
-            child = child();
-            break;
-        }
-        element.appendChild(child);
-      }
-    });
-  }
-
-  return element;
+  return appendChildren(element, children);
 };
