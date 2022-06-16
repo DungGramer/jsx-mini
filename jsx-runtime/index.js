@@ -5,6 +5,20 @@ const flatten = (arr) =>
     []
   );
 
+function transformElement(element) {
+  if (!element) return;
+
+  switch (typeof element) {
+    case 'string':
+    case 'number':
+      return document.createTextNode(element);
+    case 'function':
+      return element();
+    default:
+      return element;
+  }
+}
+
 const appendChildren = (element, children) => {
   const flattenChildren = Array.isArray(children)
     ? flatten(children)
@@ -12,18 +26,7 @@ const appendChildren = (element, children) => {
 
   flattenChildren.forEach((child) => {
     if (child) {
-      let transformChild = child;
-      switch (typeof child) {
-        case 'string':
-        case 'number':
-          transformChild = document.createTextNode(child);
-          break;
-        case 'function':
-          transformChild = child();
-          break;
-        default:
-          break;
-      }
+      const transformChild = transformElement(child);
       element.appendChild(transformChild);
     }
   });
@@ -73,3 +76,19 @@ exports.Fragment = ({ children } = {}) => {
 
   return appendChildren(element, children);
 };
+
+
+const render = (element, selector) => {
+  if (!element) return;
+
+  const transformedElement = transformElement(element);
+
+  if (!selector) {
+    document.body.appendChild(transformedElement);
+    return;
+  }
+
+  selector.appendChild(transformedElement);
+};
+
+exports.render = render;
