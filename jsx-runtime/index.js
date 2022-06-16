@@ -11,7 +11,7 @@ function transformElement(element) {
   switch (typeof element) {
     case 'string':
     case 'number':
-      return document.createTextNode(element);
+      return document.createTextNode(element.toString());
     case 'function':
       return element();
     default:
@@ -65,7 +65,7 @@ const jsx = (tag, { ref, children, ...props } = {}) => {
   if (typeof tag === 'function') {
     return tag({ ref, children, ...props });
   }
-  throw new Error('Invalid tag type', tag);
+  throw new Error(`Invalid tag type: ${tag}`);
 };
 
 exports.jsxs = jsx;
