@@ -34,7 +34,7 @@ const appendChildren = (element, children) => {
   return element;
 };
 
-const jsx = (tag, { ref, children, ...props } = {}) => {
+export const jsx = (tag, { ref, children, ...props } = {}) => {
   if (typeof tag === 'string') {
     let element = document.createElement(tag);
 
@@ -68,17 +68,17 @@ const jsx = (tag, { ref, children, ...props } = {}) => {
   throw new Error(`Invalid tag type: ${tag}`);
 };
 
-exports.jsxs = jsx;
-exports.jsx = jsx;
+export const jsxs = jsx;
 
-exports.Fragment = ({ children } = {}) => {
+
+export const Fragment = ({ children } = {}) => {
   const element = document.createDocumentFragment();
 
   return appendChildren(element, children);
 };
 
 
-const render = (element, selector) => {
+export const render = (element, selector) => {
   if (!element) return;
 
   const transformedElement = transformElement(element);
@@ -90,5 +90,3 @@ const render = (element, selector) => {
 
   selector.appendChild(transformedElement);
 };
-
-exports.render = render;

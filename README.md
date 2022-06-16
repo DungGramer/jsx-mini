@@ -1,18 +1,20 @@
-# JSX Lite
+# JSX Mini
 
 | Using JSX without React.js
 
-[![https://nodei.co/npm/jsx-lite.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/jsx-lite.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/jsx-lite)
+[![https://nodei.co/npm/jsx-mini.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/jsx-mini.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/jsx-mini)
 
 ## Installation
 
 ```bash
-npm install -D @jsx-lite/jsx-runtime
+npm install -D jsx-mini
 # or
-yarn add -D @jsx-lite/jsx-runtime
+yarn add -D jsx-mini
 # or
-pnpm add -D @jsx-lite/jsx-runtime
+pnpm add -D jsx-mini
 ```
+
+## Config
 
 Open `babel.config.js` or `.babelrc` and add the following line:
 
@@ -24,7 +26,7 @@ Open `babel.config.js` or `.babelrc` and add the following line:
     [
         "@babel/preset-react", {
             "runtime": "automatic",
-            "importSource": "@jsx-lite"
+            "importSource": "jsx-mini"
         }
     ]
 ]
@@ -40,11 +42,18 @@ presets: [
         '@babel/preset-react',
         {
           runtime: 'automatic',
-          importSource: '@jsx-lite',
+          importSource: 'jsx-mini',
         },
     ],
 ]
 
+```
+
+### JSX Comments
+If you don’t want to configure Babel, a JSX pragma can be used to transform a single file.  
+Import the comments before the JSX code:
+```js
+    /** @jsxImportSource jsx-mini */
 ```
 
 ## Usage
@@ -52,7 +61,7 @@ presets: [
 ### Render to DOM
 
 ```js
-import { render } from "@jsx-lite/jsx-runtime";
+import { render } from "jsx-mini";
 
 const App = <h1>Hello, world!</h1>;
 render(<App />, document.getElementById("root"));

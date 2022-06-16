@@ -1,0 +1,13 @@
+lockfileVersion: 5.4
+
+specifiers:
+  mini-jsx: ^3.0.3
+
+dependencies:
+  mini-jsx: 3.0.3
+
+packages:
+
+  /mini-jsx/3.0.3:
+    resolution: {integrity: sha512-ym5WFVdOFPm3b5K8QJKTihee1M6CXpADPJirCEIigj0Zo3VpuaeyDhg1tXW5jNmiumPmP4fHW4ta8Y7uL7DWuA==}
+    dev: false

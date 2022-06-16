@@ -1,18 +1,27 @@
+type Children =
+  | Children[]
+  | Node
+  | boolean
+  | number
+  | string
+  | null
+  | undefined;
+
 declare function flatten(arr: any[]): any[];
 declare function transformElement(element: Element): any;
 declare const appendChildren: (
   element: HTMLElement | DocumentFragment,
-  children: any
+  children: Children
 ) => HTMLElement | DocumentFragment;
-declare const jsx: (
-  tag: string | ((arg0: { ref: any; children: any }) => any),
+declare const jsx: <T extends keyof HTMLElementTagNameMap>(
+  tag: T | ((arg0: { ref: any; children: Children }) => any),
   {
     ref,
     children,
     ...props
   }?: {
     ref: string | number | (() => any);
-    children: any;
+    children: Children;
   }
-) => any;
+) => HTMLElementTagNameMap[T];
 declare const render: (element: Element, selector: HTMLElement) => void;
