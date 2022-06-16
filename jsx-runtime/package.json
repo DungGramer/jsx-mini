@@ -1,0 +1,41 @@
+{
+  "name": "@jsx-lite/jsx-runtime",
+  "version": "1.0.0",
+  "description": "A preset for using JSX without React.js",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DungGramer/jsx-lite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DungGramer/jsx-lite/issues"
+  },
+  "homepage": "https://github.com/DungGramer/jsx-lite#readme",
+  "keywords": [
+    "babel",
+    "jsx",
+    "jsx-runtime",
+    "lite",
+    "jsx-without-react",
+    "jsx",
+    "jsx-runtime",
+    "jsx-lite",
+    "jsx-runtime-lite",
+    "react",
+    "react-lite",
+    "react-lite-runtime",
+    "babel-plugin-transform-react-jsx",
+    "babel-plugin-transform-react-jsx-lite",
+    "babel-preset-react-lite",
+    "babel-preset-react-lite-runtime",
+    "babel-preset-react",
+    "babel-preset-react-runtime",
+    "babel-preset-es2015",
+    "babel-preset-es2015-runtime"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "author": "DungGramer",
+  "license": "MIT"
+}
