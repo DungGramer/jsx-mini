@@ -39,14 +39,14 @@ Open `babel.config.js` or `.babelrc` and add the following line:
 ```js
 ...
 presets: [
-     [
+    [
         '@babel/preset-react',
         {
-          runtime: 'automatic',
-          importSource: 'jsx-mini',
+            runtime: 'automatic',
+            importSource: 'jsx-mini',
         },
     ],
-]
+];
 ...
 ```
 
@@ -62,70 +62,68 @@ Import the comments before the JSX code:
 ### Render to DOM
 
 ```js
-import { render } from "jsx-mini";
+import { render } from 'jsx-mini';
 
 const App = <h1>Hello, world!</h1>;
-render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById('root'));
 ```
 
 ### Query Selector
 
 ```js
-    const Button = () => (
-        <button
-            ref={event => {
-                if (event) {
-                    event.addEventListener('click', () => {
-                        alert('Hello, world!');
-                    });
-                }
-            }}
-        >Print</button>;
-    )
+const Button = () => (
+  <button
+    ref={event => {
+      event.addEventListener('click', () => {
+        alert('Hello, world!');
+      });
+    }}
+  >
+    Print
+  </button>
+);
 ```
 
 ### Fragment
 ```js
-    const Badge = ({content}) => (
-        <>
-            <span>{content}</span>
-        </>
-    );
+const Badge = ({ content }) => (
+  <>
+    <span>{content}</span>
+  </>
+);
 ```
 
 ### Async Rendering
 ```js
-    const TodoItem = async ({id}) => {
-        let api = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`);
-        let todo = await api.json();
+const TodoItem = async ({ id }) => {
+  let api = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`);
+  let todo = await api.json();
 
-        return (
-            <li>
-                <span>{todo.title}</span>
-                <input type="checkbox" checked={todo.completed} />
-            </li>
-        );
-    }
+  return (
+    <li>
+      <span>{todo.title}</span>
+      <input type="checkbox" checked={todo.completed} />
+    </li>
+  );
+};
 ```
 
 ### Children
 ```js
-    const Wrapper = ({children}) => (
-        <div>
-            {children}
-        </div>
-    );
+const Wrapper = ({ children }) => (
+  <div>{children}</div>
+);
 
-    const App = () => (
-        <Wrapper>
-            <Badge content="Hello, world!" />
-        </Wrapper>
-    );
+const App = () => (
+  <Wrapper>
+    <Badge content="Hello, world!" />
+  </Wrapper>
+);
 ```
 
 ### Set attribute
 ```js
-    const Icon = ({name, color}) => (
-        <i class={`icon icon-${name}`} style={ 'color:' + color } />
-    );
+const Icon = ({ name, color }) => (
+  <i class={`icon icon-${name}`} style={'color:' + color} />
+);
 ```
