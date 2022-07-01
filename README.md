@@ -1,8 +1,7 @@
 # JSX Mini
 
-| Using JSX without React.js
-
-[![https://nodei.co/npm/jsx-mini.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/jsx-mini.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/jsx-mini)
+| Using JSX without React.js  
+[![install size](https://packagephobia.com/badge?p=jsx-mini)](https://packagephobia.com/result?p=jsx-mini)
 
 ## Installation
 
@@ -46,7 +45,7 @@ presets: [
         },
     ],
 ]
-
+...
 ```
 
 ### JSX Comments
@@ -72,9 +71,9 @@ render(<App />, document.getElementById("root"));
 ```js
     const Button = () => (
         <button
-            ref={(el) => {
-                if (el) {
-                    el.addEventListener('click', () => {
+            ref={event => {
+                if (event) {
+                    event.addEventListener('click', () => {
                         alert('Hello, world!');
                     });
                 }
@@ -90,6 +89,21 @@ render(<App />, document.getElementById("root"));
             <span>{content}</span>
         </>
     );
+```
+
+### Async Rendering
+```js
+    const TodoItem = async ({id}) => {
+        let api = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`);
+        let todo = await api.json();
+
+        return (
+            <li>
+                <span>{todo.title}</span>
+                <input type="checkbox" checked={todo.completed} />
+            </li>
+        );
+    }
 ```
 
 ### Children
