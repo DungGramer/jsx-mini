@@ -1,7 +1,9 @@
 # JSX Mini
 
 | Using JSX without React.js  
-[![install size](https://packagephobia.com/badge?p=jsx-mini)](https://packagephobia.com/result?p=jsx-mini)
+![](https://img.badgesize.io/DungGramer/jsx-mini/master/jsx-runtime.js.svg?label=File_size)
+![](https://img.badgesize.io/DungGramer/jsx-mini/master/jsx-runtime.js.svg?compression=gzip)
+
 
 ## Installation
 
