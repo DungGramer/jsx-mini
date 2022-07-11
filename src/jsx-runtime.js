@@ -5,6 +5,22 @@ const flatten = (arr) =>
     []
   );
 
+function isHtmlTag(text) {
+  return /^<?(figcaption|blockquote|textarea|template|progress|optgroup|noscript|menuitem|fieldset|datalist|colgroup|summary|section|details|caption|article|address|strong|source|select|script|output|option|object|legend|keygen|iframe|hgroup|header|footer|figure|dialog|canvas|button|video|track|title|thead|tfoot|tbody|table|style|small|param|meter|label|input|embed|audio|aside|time|span|samp|ruby|path|meta|menu|mark|main|link|html|head|form|data|code|cite|body|base|area|abbr|wbr|var|svg|sup|sub|rtc|pre|nav|map|kbd|ins|img|div|dfn|del|col|bdo|bdi|ul|tr|th|td|rt|rp|rb|ol|li|hr|h6|h5|h4|h3|h2|h1|em|dt|dl|dd|br|u|s|q|p|i|b|a)((:|::|,|\.|#|\[)[:$#{}()\w\-\[\]='",\.# +]*)?/.test(text);
+}
+
+const addTag = (tag) => {
+  const svgRegex = /<svg(.*)>/;
+
+  if (svgRegex.test(tag)) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.innerHTML = tag;
+    return svg.children[0];
+  } else {
+    return document.createElement(tag);
+  }
+}
+
 async function transformElement(element) {
   if (!element) return;
 
@@ -40,11 +56,13 @@ const appendChildren = (element, children) => {
 
 const jsx = (tag, { ref, children, ...props } = {}) => {
   if (typeof tag === 'string') {
-    let element = document.createElement(tag);
+    let element = addTag(tag);
 
     Object.keys(props).forEach((key) => {
       if (props[key]) {
-        if (typeof props[key] === 'function') {
+        if (key === 'dangerouslySetInnerHTML') {
+          element.innerHTML = props[key];
+        } else if (typeof props[key] === 'function') {
           element[key] = props[key];
         } else {
           element.setAttribute(key, props[key]);

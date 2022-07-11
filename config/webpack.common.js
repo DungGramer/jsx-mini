@@ -16,9 +16,13 @@ module.exports = {
         },
       },
       {
-        test: /\.jpg$/,
+        test: /\.(jpg|png|gif)$/,
         type: 'asset/resource',
       },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+      }
     ],
   },
   resolve: {
